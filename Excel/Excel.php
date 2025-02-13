@@ -19,7 +19,7 @@ class Excel
      * @param string $file
      * @param array $options 
      */
-    public function loadFile($file = null, $options = array())
+    public function loadFile($file = null, $options = array(), $sheetsToLoad = array())
     {
         $this->options += $options;
 
@@ -38,6 +38,12 @@ class Excel
         if (method_exists($this->reader, 'setReadDataOnly')) {
             $this->reader->setReadDataOnly($readOnly);
         }
+
+		////////// ANA adicionado inicio
+		if($sheetsToLoad){
+			$this->reader->setLoadSheetsOnly($sheetsToLoad);
+		}
+		////////// ANA adicionado fim
 
         $this->phpExcel = $this->reader->load($file);
 
